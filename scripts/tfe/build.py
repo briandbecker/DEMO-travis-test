@@ -28,13 +28,16 @@ def post_to_github_pr(policy_data):
     policy_results = policy_data['data'][0]['attributes']['result']
 
     github_comment_body = ""
-    github_comment_body += "Advisory Fail: %s\n" %(policy_results['advisory-failed'])
+    github_comment_body += "Advisory: %s\n" %(policy_results['advisory-failed'])
     github_comment_body += "Soft Fail: %s\n" %(policy_results['soft-failed'])
     github_comment_body += "Hard Fail: %s\n" %(policy_results['hard-failed'])
     github_comment_body += "Total Fail: %s\n" %(policy_results['total-failed'])
     github_comment_body += "Pass: %s\n" %(policy_results['passed'])
     github_comment_body += "\n\n"
     for p in policy_results['sentinel']['policies']:
+        status="Failed"
+        if p['result']==True:
+            status="Passed"
         github_comment_body += "%s - %s\n" %(p['policy'], p['result'])
 
     url = "https://api.github.com/repos/%s/issues/%s/comments" % (os.environ['TRAVIS_REPO_SLUG'],os.environ['TRAVIS_PULL_REQUEST'])

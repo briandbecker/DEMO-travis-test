@@ -7,7 +7,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "b" {
-  bucket = "csa-sentinel-demo"
+  bucket = "csa-demo-bucket"
   acl    = "public-read"
 }
 
