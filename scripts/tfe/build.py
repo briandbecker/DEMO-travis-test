@@ -38,7 +38,7 @@ def post_to_github_pr(policy_data):
         status="Failed"
         if p['result']==True:
             status="Passed"
-        github_comment_body += "%s - %s\n" %(p['policy'], p['result'])
+        github_comment_body += "%s - %s\n" %(p['policy'], status)
 
     url = "https://api.github.com/repos/%s/issues/%s/comments" % (os.environ['TRAVIS_REPO_SLUG'],os.environ['TRAVIS_PULL_REQUEST'])
     payload = {
