@@ -8,6 +8,11 @@ provider "aws" {
 
 resource "aws_s3_bucket" "b" {
   bucket = "csa-demo-bucket"
-  acl    = "public-read"
+  acl    = "private"
+
+  tags {
+    created_by     = "Brian"
+    application_id = "CSA"
+  }
 }
 
